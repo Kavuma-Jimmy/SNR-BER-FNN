@@ -1,0 +1,45 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Simulate signal strength measurements across a grid
+grid_size = 10  # Size of the grid (e.g., 10x10)
+signal_strength_data = np.random.rand(grid_size, grid_size)  # Simulated signal strength measurements
+
+# Preprocess data (e.g., normalize signal strength values)
+normalized_signal_strength_data = (signal_strength_data - np.min(signal_strength_data)) / (np.max(signal_strength_data) - np.min(signal_strength_data))
+
+# Print or visualize the preprocessed data
+print("Normalized Signal Strength Data:")
+print(normalized_signal_strength_data)
+
+# Step 3: Analyze Signal Strength or Interference Patterns
+# For simplicity, let's assume we're looking for areas with signal strength below a certain threshold
+
+def detect_jamming(signal_strength_data, threshold):
+    jamming_locations = np.where(signal_strength_data < threshold)
+    return jamming_locations
+
+# Step 4: Implement Detection Algorithm
+threshold = 0.2  # Example threshold for detecting jamming activity
+jamming_locations = detect_jamming(normalized_signal_strength_data, threshold)
+
+# Step 5: Visualize Results
+
+
+# Plot original signal strength data
+plt.imshow(normalized_signal_strength_data, cmap='viridis', origin='lower')
+plt.colorbar(label='Normalized Signal Strength')
+plt.title('Original Signal Strength Data')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.show()
+
+# Plot detected jamming locations
+plt.imshow(normalized_signal_strength_data, cmap='viridis', origin='lower')
+plt.colorbar(label='Normalized Signal Strength')
+plt.title('Detected Jamming Locations')
+plt.scatter(jamming_locations[1], jamming_locations[0], color='red', label='Jamming Locations')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.legend()
+plt.show()
